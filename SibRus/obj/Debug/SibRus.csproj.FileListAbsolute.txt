@@ -1,0 +1,14 @@
+C:\Projects\SibRus\SibRus\bin\Debug\SibRus.exe.config
+C:\Projects\SibRus\SibRus\bin\Debug\SibRus.exe
+C:\Projects\SibRus\SibRus\bin\Debug\SibRus.pdb
+C:\Projects\SibRus\SibRus\bin\Debug\OpenTK.dll
+C:\Projects\SibRus\SibRus\bin\Debug\RLNET.dll
+C:\Projects\SibRus\SibRus\bin\Debug\RogueSharp.dll
+C:\Projects\SibRus\SibRus\bin\Debug\OpenTK.xml
+C:\Projects\SibRus\SibRus\bin\Debug\OpenTK.dll.config
+C:\Projects\SibRus\SibRus\obj\Debug\SibRus.csproj.AssemblyReference.cache
+C:\Projects\SibRus\SibRus\obj\Debug\SibRus.csproj.CoreCompileInputs.cache
+C:\Projects\SibRus\SibRus\obj\Debug\SibRus.csproj.CopyComplete
+C:\Projects\SibRus\SibRus\obj\Debug\SibRus.exe
+C:\Projects\SibRus\SibRus\obj\Debug\SibRus.pdb
+C:\Projects\SibRus\SibRus\bin\Debug\terminal8x8.png
