@@ -132,7 +132,11 @@ namespace SibRus
         {
             if (_renderRequired)
             {
-                DungeonMap.Draw(_mapConsole);
+                _mapConsole.Clear();
+                _statConsole.Clear();
+                _messageConsole.Clear();
+
+                DungeonMap.Draw(_mapConsole, _statConsole);
 
                 Player.Draw(_mapConsole, DungeonMap);
                 Player.DrawStats(_statConsole);

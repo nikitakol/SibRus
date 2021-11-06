@@ -17,7 +17,7 @@ namespace SibRus.Core
             _monsters = new List<Monster>();
         }
 
-        public void Draw( RLConsole mapConsole )
+        public void Draw( RLConsole mapConsole, RLConsole statConsole )
         {
             mapConsole.Clear();
             foreach ( Cell cell in GetAllCells())
@@ -25,9 +25,17 @@ namespace SibRus.Core
                 SetConsoleSymbolForCell(mapConsole, cell);
             }
 
+            int i = 0;
+
             foreach (Monster monster in _monsters)
             {
                 monster.Draw(mapConsole, this);
+
+                if ( IsInFov(monster.X, monster.Y))
+                {
+                    monster.DrawStats(statConsole, i);
+                    i++;
+                }
             }
         }
 
