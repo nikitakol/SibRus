@@ -44,23 +44,6 @@ namespace SibRus
             _statConsole = new RLConsole(_statWidth, _statHeight);
             _inventoryConsole = new RLConsole(_inventoryWidth, _inventoryHeight);
 
-            Player = new Player();
-
-            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight);
-            DungeonMap = mapGenerator.CreateMap();
-            DungeonMap.UpdatePlayerFieldOfView();
-
-            _rootConsole.Update += OnRootConsoleUpdate;
-            
-            _rootConsole.Render += OnRootConsoleRender;
-            
-            _rootConsole.Run();
-        }
-
-        
-        private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
-        {
-
             _mapConsole.SetBackColor(0, 0, _mapWidth, _mapHeight, RLColor.Black);
             _mapConsole.Print(1, 1, "Map", RLColor.White);
 
@@ -84,6 +67,25 @@ namespace SibRus
 
             _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Palettes.DbWood);
             _inventoryConsole.Print(1, 1, "Inventory", Colors.TextHeading);
+
+            Player = new Player();
+
+            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight);
+            DungeonMap = mapGenerator.CreateMap();
+            DungeonMap.UpdatePlayerFieldOfView();
+
+            _rootConsole.Update += OnRootConsoleUpdate;
+            
+            _rootConsole.Render += OnRootConsoleRender;
+            
+            _rootConsole.Run();
+        }
+
+        
+        private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
+        {
+
+            
         }
 
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
