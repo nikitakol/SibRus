@@ -1,6 +1,8 @@
 ﻿using RLNET;
+using RogueSharp.Random;
 using SibRus.Core;
 using SibRus.Systems;
+using System;
 
 namespace SibRus
 {
@@ -10,8 +12,7 @@ namespace SibRus
 
         public static CommandSystem CommandSystem { get; private set; }
 
-
-        public static Player Player { get; private set; }
+        public static Player Player { get; set; }
 
         public static DungeonMap DungeonMap { get; private set; }
 
@@ -35,11 +36,16 @@ namespace SibRus
         private static readonly int _inventoryHeight = 11;
         private static RLConsole _inventoryConsole;
 
+        public static IRandom Random { get; private set; }
+
         public static void Main()
         {
+            int seed = (int)DateTime.UtcNow.Ticks;
+            Random = new DotNetRandom(seed);
+
+            string consoleTitle = $"SibRus - Level 1 - Seed{seed}";
+
             string fontFileName = "terminal8x8.png";
-    
-            string consoleTitle = "RougeSharp V3 Tutorial - Level 1";
             
             _rootConsole = new RLRootConsole(fontFileName, _screenWidth, _screenHeight,
               8, 8, 1f, consoleTitle);
@@ -75,9 +81,7 @@ namespace SibRus
 
             CommandSystem = new CommandSystem();
 
-            Player = new Player();
-
-            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight);
+            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 13 , 7);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
 

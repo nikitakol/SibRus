@@ -1,10 +1,18 @@
 ﻿using RLNET;
 using RogueSharp;
+using System.Collections.Generic;
 
 namespace SibRus.Core
 {
     public class DungeonMap : Map
     {
+        public List<Rectangle> Rooms;
+
+        public DungeonMap()
+        {
+            Rooms = new List<Rectangle>();
+        }
+
         public void Draw( RLConsole mapConsole )
         {
             mapConsole.Clear();
@@ -86,6 +94,13 @@ namespace SibRus.Core
         {
             ICell cell = GetCell(x, y );
             SetCellProperties(cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored);
+        }
+        
+        public void AddPlayer(Player player)
+        {
+            Game.Player = player;
+            SetIsWalkable(player.X, player.Y, false);
+            UpdatePlayerFieldOfView();
         }
     }
 }
