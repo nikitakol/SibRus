@@ -6,6 +6,11 @@ namespace SibRus
 {
     public class Game
     {
+        private static bool _renderRequired = true;
+
+        public static CommandSystem CommandSystem { get; private set; }
+
+
         public static Player Player { get; private set; }
 
         public static DungeonMap DungeonMap { get; private set; }
@@ -68,6 +73,8 @@ namespace SibRus
             _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Palettes.DbWood);
             _inventoryConsole.Print(1, 1, "Inventory", Colors.TextHeading);
 
+            CommandSystem = new CommandSystem();
+
             Player = new Player();
 
             MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight);
@@ -84,27 +91,62 @@ namespace SibRus
         
         private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
         {
+            bool didPlayerAct = false;
+            RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
 
-            
+            if ( keyPress != null)
+            {
+                if ( keyPress.Key == RLKey.Up)
+                {
+                    didPlayerAct = CommandSystem.MovePlayer(Direction.Up);
+                }
+                else if ( keyPress.Key == RLKey.Down)
+                {
+                    didPlayerAct = CommandSystem.MovePlayer(Direction.Down);
+                }
+                else if (keyPress.Key == RLKey.Left)
+                {
+                    didPlayerAct = CommandSystem.MovePlayer(Direction.Left);
+                }
+                else if( keyPress.Key == RLKey.Right)
+                {
+                    didPlayerAct = CommandSystem.MovePlayer(Direction.Right);
+                }
+                else if( keyPress.Key == RLKey.Escape)
+                {
+                    _rootConsole.Close();
+                }
+            }
+
+            if (didPlayerAct)
+            {
+                _renderRequired = true;
+            }
         }
 
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
-            _rootConsole.Draw();
+            if (_renderRequired)
+            {
+                _rootConsole.Draw();
 
-            DungeonMap.Draw(_mapConsole);
-            Player.Draw(_mapConsole, DungeonMap);
+                DungeonMap.Draw(_mapConsole);
+                Player.Draw(_mapConsole, DungeonMap);
 
-            RLConsole.Blit(_mapConsole, 0, 0, _mapWidth, _mapHeight,
-              _rootConsole, 0, _inventoryHeight);
-            RLConsole.Blit(_statConsole, 0, 0, _statWidth, _statHeight,
-              _rootConsole, _mapWidth, 0);
-            RLConsole.Blit(_messageConsole, 0, 0, _messageWidth, _messageHeight,
-              _rootConsole, 0, _screenHeight - _messageHeight);
-            RLConsole.Blit(_inventoryConsole, 0, 0, _inventoryWidth, _inventoryHeight,
-              _rootConsole, 0, 0);
+                RLConsole.Blit(_mapConsole, 0, 0, _mapWidth, _mapHeight,
+                  _rootConsole, 0, _inventoryHeight);
+                RLConsole.Blit(_statConsole, 0, 0, _statWidth, _statHeight,
+                  _rootConsole, _mapWidth, 0);
+                RLConsole.Blit(_messageConsole, 0, 0, _messageWidth, _messageHeight,
+                  _rootConsole, 0, _screenHeight - _messageHeight);
+                RLConsole.Blit(_inventoryConsole, 0, 0, _inventoryWidth, _inventoryHeight,
+                  _rootConsole, 0, 0);
 
-            _rootConsole.Draw();
+                _rootConsole.Draw();
+
+                _renderRequired = false;
+            }
+
         }
     }
 }
