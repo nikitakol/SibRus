@@ -15,5 +15,7 @@ namespace SibRus.Core
         public static RLColor WallFov = Palettes.SecondaryLighter;
 
         public static RLColor TextHeading = Palettes.DbLight;
+
+        public static RLColor Player = Palettes.DbLight;
     }
 }

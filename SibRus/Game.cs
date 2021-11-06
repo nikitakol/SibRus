@@ -6,6 +6,8 @@ namespace SibRus
 {
     public class Game
     {
+        public static Player Player { get; private set; }
+
         public static DungeonMap DungeonMap { get; private set; }
 
         private static readonly int _screenWidth = 100;
@@ -42,8 +44,11 @@ namespace SibRus
             _statConsole = new RLConsole(_statWidth, _statHeight);
             _inventoryConsole = new RLConsole(_inventoryWidth, _inventoryHeight);
 
+            Player = new Player();
+
             MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight);
             DungeonMap = mapGenerator.CreateMap();
+            DungeonMap.UpdatePlayerFieldOfView();
 
             _rootConsole.Update += OnRootConsoleUpdate;
             
@@ -55,7 +60,6 @@ namespace SibRus
         
         private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
         {
-            _rootConsole.Print(10, 10, "It worked!", RLColor.White);
 
             _mapConsole.SetBackColor(0, 0, _mapWidth, _mapHeight, RLColor.Black);
             _mapConsole.Print(1, 1, "Map", RLColor.White);
@@ -87,6 +91,7 @@ namespace SibRus
             _rootConsole.Draw();
 
             DungeonMap.Draw(_mapConsole);
+            Player.Draw(_mapConsole, DungeonMap);
 
             RLConsole.Blit(_mapConsole, 0, 0, _mapWidth, _mapHeight,
               _rootConsole, 0, _inventoryHeight);
