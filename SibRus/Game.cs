@@ -10,6 +10,8 @@ namespace SibRus
     {
         private static bool _renderRequired = true;
 
+        public static MessageLog MessageLog { get; private set; }
+
         public static CommandSystem CommandSystem { get; private set; }
 
         public static Player Player { get; set; }
@@ -58,9 +60,6 @@ namespace SibRus
             _mapConsole.SetBackColor(0, 0, _mapWidth, _mapHeight, RLColor.Black);
             _mapConsole.Print(1, 1, "Map", RLColor.White);
 
-            _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, RLColor.Gray);
-            _messageConsole.Print(1, 1, "Messages", RLColor.White);
-
             _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, RLColor.Brown);
             _statConsole.Print(1, 1, "Stats", RLColor.White);
 
@@ -73,11 +72,12 @@ namespace SibRus
             _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, Palettes.DbDeepWater);
             _messageConsole.Print(1, 1, "Messages", Colors.TextHeading);
 
-            _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, Palettes.DbOldStone);
-            _statConsole.Print(1, 1, "Stats", Colors.TextHeading);
-
             _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Palettes.DbWood);
             _inventoryConsole.Print(1, 1, "Inventory", Colors.TextHeading);
+
+            MessageLog = new MessageLog();
+            MessageLog.Add("Rustam arrives on level 1");
+            MessageLog.Add($"Level created with seed '{seed}'");
 
             CommandSystem = new CommandSystem();
 
@@ -123,7 +123,7 @@ namespace SibRus
             }
 
             if (didPlayerAct)
-            {
+            { 
                 _renderRequired = true;
             }
         }
@@ -133,7 +133,11 @@ namespace SibRus
             if (_renderRequired)
             {
                 DungeonMap.Draw(_mapConsole);
+
                 Player.Draw(_mapConsole, DungeonMap);
+                Player.DrawStats(_statConsole);
+
+                MessageLog.Draw(_messageConsole);
 
                 RLConsole.Blit(_mapConsole, 0, 0, _mapWidth, _mapHeight,
                   _rootConsole, 0, _inventoryHeight);

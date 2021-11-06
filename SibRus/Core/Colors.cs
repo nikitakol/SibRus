@@ -14,8 +14,11 @@ namespace SibRus.Core
         public static RLColor WallBackgroundFov = Palettes.SecondaryDarker;
         public static RLColor WallFov = Palettes.SecondaryLighter;
 
-        public static RLColor TextHeading = Palettes.DbLight;
 
         public static RLColor Player = Palettes.DbLight;
+
+        public static RLColor TextHeading = RLColor.White;
+        public static RLColor Text = Palettes.DbLight;
+        public static RLColor Gold = Palettes.DbSun;
     }
 }
