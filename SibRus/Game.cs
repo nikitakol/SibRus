@@ -1,10 +1,13 @@
 ﻿using RLNET;
 using SibRus.Core;
+using SibRus.Systems;
 
 namespace SibRus
 {
     public class Game
     {
+        public static DungeonMap DungeonMap { get; private set; }
+
         private static readonly int _screenWidth = 100;
         private static readonly int _screenHeight = 70;
         private static RLRootConsole _rootConsole;
@@ -38,6 +41,9 @@ namespace SibRus
             _messageConsole = new RLConsole(_messageWidth, _messageHeight);
             _statConsole = new RLConsole(_statWidth, _statHeight);
             _inventoryConsole = new RLConsole(_inventoryWidth, _inventoryHeight);
+
+            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight);
+            DungeonMap = mapGenerator.CreateMap();
 
             _rootConsole.Update += OnRootConsoleUpdate;
             
@@ -79,6 +85,8 @@ namespace SibRus
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
             _rootConsole.Draw();
+
+            DungeonMap.Draw(_mapConsole);
 
             RLConsole.Blit(_mapConsole, 0, 0, _mapWidth, _mapHeight,
               _rootConsole, 0, _inventoryHeight);

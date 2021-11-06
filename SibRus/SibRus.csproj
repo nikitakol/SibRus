@@ -53,9 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Colors.cs" />
-    <Compile Include="Core\Swatch.cs" />
+    <Compile Include="Core\DungeonMap.cs" />
+    <Compile Include="Core\Palettes.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\MapGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
