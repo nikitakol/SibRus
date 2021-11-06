@@ -1,4 +1,5 @@
 ﻿using RLNET;
+using SibRus.Core;
 
 namespace SibRus
 {
@@ -61,6 +62,18 @@ namespace SibRus
 
             _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, RLColor.Cyan);
             _inventoryConsole.Print(1, 1, "Inventory", RLColor.White);
+
+            _mapConsole.SetBackColor(0, 0, _mapWidth, _mapHeight, Colors.FloorBackground);
+            _mapConsole.Print(1, 1, "Map", Colors.TextHeading);
+
+            _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, Palettes.DbDeepWater);
+            _messageConsole.Print(1, 1, "Messages", Colors.TextHeading);
+
+            _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, Palettes.DbOldStone);
+            _statConsole.Print(1, 1, "Stats", Colors.TextHeading);
+
+            _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Palettes.DbWood);
+            _inventoryConsole.Print(1, 1, "Inventory", Colors.TextHeading);
         }
 
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
