@@ -128,8 +128,6 @@ namespace SibRus
         {
             if (_renderRequired)
             {
-                _rootConsole.Draw();
-
                 DungeonMap.Draw(_mapConsole);
                 Player.Draw(_mapConsole, DungeonMap);
 

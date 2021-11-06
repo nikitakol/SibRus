@@ -66,7 +66,7 @@ namespace SibRus.Core
         {
             if ( GetCell(x, y).IsWalkable)
             {
-                SetIsWalkable(actor.X, actor.Y, false);
+                SetIsWalkable(actor.X, actor.Y, true);
 
                 actor.X = x;
                 actor.Y = y;
@@ -84,9 +84,8 @@ namespace SibRus.Core
 
         public void SetIsWalkable( int x, int y, bool isWalkable)
         {
-            //Refactor Code [Player Input]
-            Cell cell = (Cell)GetCell(x, y);
-            SetCellProperties(cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored );
+            ICell cell = GetCell(x, y );
+            SetCellProperties(cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored);
         }
     }
 }
