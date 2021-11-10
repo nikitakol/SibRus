@@ -9,10 +9,12 @@ namespace SibRus.Core
 {
     public class Monster : Actor
     {
+        public int? TurnsAlerted { get; set; }
+
         public void DrawStats(RLConsole statConsole, int position)
         {
             int yPosition = 13 + (position * 2);
-
+             
             statConsole.Print(1, yPosition, Symbol.ToString(), Color);
 
             int width = Convert.ToInt32(((double)Health / (double) MaxHealth) * 16.0);
