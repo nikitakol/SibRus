@@ -1,4 +1,6 @@
-﻿using RogueSharp.DiceNotation;
+﻿using RogueSharp;
+using RogueSharp.DiceNotation;
+using SibRus.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +10,10 @@ using System.Threading.Tasks;
 namespace SibRus.Core
 {
     public class CommandSystem
-    {
-        public bool MovePlayer( Direction direction)
+    {   
+        public bool IsPlayerTurn { get; set; }
+
+        public bool MovePlayer(Direction direction)
         {
             int x = Game.Player.X;
             int y = Game.Player.Y;
@@ -42,7 +46,7 @@ namespace SibRus.Core
                     }
             }
 
-            if ( Game.DungeonMap.SetActorPosition( Game.Player, x, y))
+            if (Game.DungeonMap.SetActorPosition(Game.Player, x, y))
             {
                 return true;
             }
@@ -56,6 +60,45 @@ namespace SibRus.Core
             }
 
             return false;
+        }
+
+        public void EndPlayerTurn()
+        {
+            IsPlayerTurn = false;
+        }
+
+        public void ActivateMonsters()
+        {
+            IScheduleable schedulable = Game.SchedulingSystem.Get();
+
+            if (schedulable is Player)
+            {
+                IsPlayerTurn = true;
+                Game.SchedulingSystem.Add(Game.Player);
+            }
+            else
+            {
+                Monster monster = schedulable as Monster;
+
+                if (monster != null)
+                {
+                    monster.PerformAction(this);
+                    Game.SchedulingSystem.Add(monster);
+                }
+
+                ActivateMonsters();
+            }
+        }
+
+        public void MoveMonster(Monster monster, ICell cell)
+        {
+            if ( !Game.DungeonMap.SetActorPosition(monster, cell.X, cell.Y))
+            {
+                if (Game.Player.X == cell.X && Game.Player.Y == cell.Y)
+                {
+                    Attack(monster, Game.Player);
+                }
+            }
         }
 
         public void Attack(Actor attacker, Actor defender)

@@ -1,4 +1,5 @@
 ﻿using RLNET;
+using SibRus.Behaviors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,13 @@ namespace SibRus.Core
 
             statConsole.Print(2, yPosition, $": {Name}", Palettes.DbLight);
         }
+
+        //virtual - MoveAndAttack will be set for default for every monster
+        public virtual void PerformAction(CommandSystem commandSystem)
+        {
+            var behavior = new StandardMoveAndAttack();
+            behavior.Act(this, commandSystem);
+        }
+
     }
 }

@@ -8,16 +8,6 @@ namespace SibRus
 {
     public class Game
     {
-        private static bool _renderRequired = true;
-
-        public static MessageLog MessageLog { get; private set; }
-
-        public static CommandSystem CommandSystem { get; private set; }
-
-        public static Player Player { get; set; }
-
-        public static DungeonMap DungeonMap { get; private set; }
-
         private static readonly int _screenWidth = 100;
         private static readonly int _screenHeight = 70;
         private static RLRootConsole _rootConsole;
@@ -37,6 +27,18 @@ namespace SibRus
         private static readonly int _inventoryWidth = 80;
         private static readonly int _inventoryHeight = 11;
         private static RLConsole _inventoryConsole;
+
+        private static bool _renderRequired = true;
+
+        public static CommandSystem CommandSystem { get; private set; }
+
+        public static Player Player { get; set; }
+
+        public static DungeonMap DungeonMap { get; private set; }
+
+        public static MessageLog MessageLog { get; private set; }
+
+        public static SchedulingSystem SchedulingSystem { get; private set; }
 
         public static IRandom Random { get; private set; }
 
@@ -81,6 +83,8 @@ namespace SibRus
 
             CommandSystem = new CommandSystem();
 
+            SchedulingSystem = new SchedulingSystem();
+
             MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 13 , 7);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
@@ -98,32 +102,41 @@ namespace SibRus
             bool didPlayerAct = false;
             RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
 
-            if ( keyPress != null)
+            if (CommandSystem.IsPlayerTurn)
             {
-                if ( keyPress.Key == RLKey.Up)
+                if (keyPress != null)
                 {
-                    didPlayerAct = CommandSystem.MovePlayer(Direction.Up);
+                    if (keyPress.Key == RLKey.Up)
+                    {
+                        didPlayerAct = CommandSystem.MovePlayer(Direction.Up);
+                    }
+                    else if (keyPress.Key == RLKey.Down)
+                    {
+                        didPlayerAct = CommandSystem.MovePlayer(Direction.Down);
+                    }
+                    else if (keyPress.Key == RLKey.Left)
+                    {
+                        didPlayerAct = CommandSystem.MovePlayer(Direction.Left);
+                    }
+                    else if (keyPress.Key == RLKey.Right)
+                    {
+                        didPlayerAct = CommandSystem.MovePlayer(Direction.Right);
+                    }
+                    else if (keyPress.Key == RLKey.Escape)
+                    {
+                        _rootConsole.Close();
+                    }
                 }
-                else if ( keyPress.Key == RLKey.Down)
+                if (didPlayerAct)
                 {
-                    didPlayerAct = CommandSystem.MovePlayer(Direction.Down);
-                }
-                else if (keyPress.Key == RLKey.Left)
-                {
-                    didPlayerAct = CommandSystem.MovePlayer(Direction.Left);
-                }
-                else if( keyPress.Key == RLKey.Right)
-                {
-                    didPlayerAct = CommandSystem.MovePlayer(Direction.Right);
-                }
-                else if( keyPress.Key == RLKey.Escape)
-                {
-                    _rootConsole.Close();
+                    _renderRequired = true;
+                    CommandSystem.EndPlayerTurn();
                 }
             }
 
-            if (didPlayerAct)
-            { 
+            else
+            {
+                CommandSystem.ActivateMonsters();
                 _renderRequired = true;
             }
         }

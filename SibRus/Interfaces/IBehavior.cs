@@ -1,4 +1,5 @@
 ﻿using SibRus.Core;
+using SibRus.Systems;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace SibRus.Interfaces
 {
     public interface IBehavior
     {
+        bool Act(Monster monster, CommandSystem commandSystem);
     }
 }

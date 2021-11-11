@@ -4,7 +4,7 @@ using SibRus.Interfaces;
 
 namespace SibRus.Core
 {
-    public class Actor : IActor, IDrawable
+    public class Actor : IActor, IDrawable, IScheduleable
     {
         // IActor
         private int _attack;
@@ -137,10 +137,12 @@ namespace SibRus.Core
                 _speed = value;
             }
         }
+
         public RLColor Color { get; set; }
         public char Symbol { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+
         public void Draw( RLConsole console, IMap map)
         {
             if (!map.GetCell( X, Y).IsExplored)
@@ -155,6 +157,14 @@ namespace SibRus.Core
             else
             {
                 console.Set(X, Y, Colors.Floor, Colors.FloorBackground, '.');
+            }
+        }
+
+        public int Time
+        {
+            get
+            {
+                return Speed;
             }
         }
     }

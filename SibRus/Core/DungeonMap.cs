@@ -23,7 +23,7 @@ namespace SibRus.Core
             mapConsole.Clear();
             foreach ( Cell cell in GetAllCells())
             {
-                SetConsoleSymbolForCell(mapConsole, cell);
+                SetConsoleSymbolForICell(mapConsole, cell);
             }
 
             int i = 0;
@@ -40,7 +40,7 @@ namespace SibRus.Core
             }
         }
 
-        private void SetConsoleSymbolForCell(RLConsole console, Cell cell)
+        private void SetConsoleSymbolForICell(RLConsole console, ICell cell)
         {
             if (!cell.IsExplored)
             {
@@ -119,19 +119,23 @@ namespace SibRus.Core
             Game.Player = player;
             SetIsWalkable(player.X, player.Y, false);
             UpdatePlayerFieldOfView();
+            Game.SchedulingSystem.Add(player);
         }
 
         public void AddMonster(Monster monster)
-        {
+        {   
             _monsters.Add(monster);
 
             SetIsWalkable(monster.X, monster.Y, false);
+
+            Game.SchedulingSystem.Add(monster);
         }
 
         public void RemoveMonster(Monster monster)
         {
             _monsters.Remove(monster);
             SetIsWalkable(monster.X, monster.Y, true);
+            Game.SchedulingSystem.Remove(monster);
         }
 
         public Monster GetMonsterAt( int x, int y)

@@ -1,17 +1,14 @@
 ﻿using RogueSharp;
 using SibRus.Core;
 using SibRus.Interfaces;
-using System;
-using System.Collections.Generic;
+using SibRus.Systems;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SibRus.Behaviors
 {
-    class StandardMoveAndAttack : IBehavior
+    public class StandardMoveAndAttack : IBehavior
     {
-        bool Act(Monster monster, CommandSystem commandSystem)
+        public bool Act(Monster monster, CommandSystem commandSystem)
         {
             DungeonMap dungeonMap = Game.DungeonMap;
             Player player = Game.Player;
@@ -67,7 +64,7 @@ namespace SibRus.Behaviors
                     {
                         // TODO: This should be path.StepForward() but a bug in RogueSharp V3
                         // The bug is that a Path returned from a Pathfinder does not include the source Cell
-                        commandSystem.MoveMonster(monster, path.Steps.First());
+                        commandSystem.MoveMonster(monster, path.StepForward());
                     }
                     catch (NoMoreStepsException)
                     {
