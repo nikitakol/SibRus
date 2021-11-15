@@ -14,6 +14,10 @@ namespace SibRus.Core
         public static RLColor WallBackgroundFov = Palettes.SecondaryDarker;
         public static RLColor WallFov = Palettes.SecondaryLighter;
 
+        public static RLColor DoorBackground = Palettes.ComplimentDarkest;
+        public static RLColor Door = Palettes.ComplimentLighter;
+        public static RLColor DoorBackgroundFov = Palettes.ComplimentDarker;
+        public static RLColor DoorFov = Palettes.ComplimentLightest;
 
         public static RLColor Player = Palettes.DbLight;
 

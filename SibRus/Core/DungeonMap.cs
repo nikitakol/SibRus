@@ -11,11 +11,15 @@ namespace SibRus.Core
 
         private readonly List<Monster> _monsters;
 
+        public List<Door> Doors { get; set; }
+
         public DungeonMap()
         {
             Rooms = new List<Rectangle>();
 
             _monsters = new List<Monster>();
+
+            Doors = new List<Door>();
         }
 
         public void Draw( RLConsole mapConsole, RLConsole statConsole )
@@ -27,6 +31,11 @@ namespace SibRus.Core
             }
 
             int i = 0;
+
+            foreach (Door door in Doors)
+            {
+                door.Draw(mapConsole, this);
+            }
 
             foreach (Monster monster in _monsters)
             {
@@ -98,6 +107,9 @@ namespace SibRus.Core
                 actor.Y = y;
 
                 SetIsWalkable(actor.X, actor.Y, false);
+
+                // Try to open a door if one exists here
+                OpenDoor(actor, x, y);
 
                 if (actor is Player)
                 {
@@ -174,6 +186,27 @@ namespace SibRus.Core
                 }
             }
             return false;
+        }
+
+        // Return the door at the x,y position or null if one is not found.
+        public Door GetDoor(int x, int y)
+        {
+            return Doors.SingleOrDefault(d => d.X == x && d.Y == y);
+        }
+
+        // The actor opens the door located at the x,y position
+        private void OpenDoor(Actor actor, int x, int y)
+        {
+            Door door = GetDoor(x, y);
+            if (door != null && !door.IsOpen)
+            {
+                door.IsOpen = true;
+                var cell = GetCell(x, y);
+                // Once the door is opened it should be marked as transparent and no longer block field-of-view
+                SetCellProperties(x, y, true, cell.IsWalkable, cell.IsExplored);
+
+                Game.MessageLog.Add($"{actor.Name} opened a door");
+            }
         }
     }
 }
