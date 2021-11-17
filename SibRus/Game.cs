@@ -28,6 +28,8 @@ namespace SibRus
         private static readonly int _inventoryHeight = 11;
         private static RLConsole _inventoryConsole;
 
+        private static int _mapLevel = 1;
+
         private static bool _renderRequired = true;
 
         public static CommandSystem CommandSystem { get; private set; }
@@ -47,7 +49,7 @@ namespace SibRus
             int seed = (int)DateTime.UtcNow.Ticks;
             Random = new DotNetRandom(seed);
 
-            string consoleTitle = $"SibRus - Level 1 - Seed{seed}";
+            string consoleTitle = $"SibRus - Level {_mapLevel} - Seed{seed}";
 
             string fontFileName = "terminal8x8.png";
             
@@ -85,7 +87,7 @@ namespace SibRus
 
             SchedulingSystem = new SchedulingSystem();
 
-            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 13 , 7);
+            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 13 , 7, _mapLevel);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
 
@@ -125,6 +127,18 @@ namespace SibRus
                     else if (keyPress.Key == RLKey.Escape)
                     {
                         _rootConsole.Close();
+                    }
+                    else if(keyPress.Key == RLKey.Period)
+                    {
+                        if (DungeonMap.CanMoveDownToNextLevel())
+                        {
+                            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 13, 7, ++_mapLevel);
+                            DungeonMap = mapGenerator.CreateMap();
+                            MessageLog = new MessageLog();
+                            CommandSystem = new CommandSystem();
+                            _rootConsole.Title = $"SibRus - Level {_mapLevel}";
+                            didPlayerAct = true;
+                        }
                     }
                 }
                 if (didPlayerAct)

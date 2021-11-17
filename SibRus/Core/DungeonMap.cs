@@ -11,10 +11,16 @@ namespace SibRus.Core
 
         private readonly List<Monster> _monsters;
 
+        public Stairs StairsUp { get; set; }
+
+        public Stairs StairsDown { get; set; }
+
         public List<Door> Doors { get; set; }
 
         public DungeonMap()
         {
+            Game.SchedulingSystem.Clear();
+
             Rooms = new List<Rectangle>();
 
             _monsters = new List<Monster>();
@@ -36,6 +42,9 @@ namespace SibRus.Core
             {
                 door.Draw(mapConsole, this);
             }
+
+            StairsUp.Draw(mapConsole, this);
+            StairsDown.Draw(mapConsole, this);
 
             foreach (Monster monster in _monsters)
             {
@@ -80,6 +89,12 @@ namespace SibRus.Core
                     console.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#');
                 }
             }
+        }
+
+        public bool CanMoveDownToNextLevel()
+        {
+            Player player = Game.Player;
+            return StairsDown.X == player.X && StairsDown.Y == player.Y;
         }
 
         public void UpdatePlayerFieldOfView()

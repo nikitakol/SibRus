@@ -62,6 +62,7 @@
     <Compile Include="Core\Monster.cs" />
     <Compile Include="Core\Palettes.cs" />
     <Compile Include="Core\Player.cs" />
+    <Compile Include="Core\Stairs.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Interfaces\IActor.cs" />
     <Compile Include="Interfaces\IBehavior.cs" />
