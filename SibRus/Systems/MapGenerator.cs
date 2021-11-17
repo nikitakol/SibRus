@@ -1,10 +1,10 @@
-﻿using RogueSharp;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using RogueSharp;
 using RogueSharp.DiceNotation;
 using SibRus.Core;
 using SibRus.Monsters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SibRus.Systems
 {
@@ -30,9 +30,10 @@ namespace SibRus.Systems
 
         public DungeonMap CreateMap()
         {
-            _map.Initialize( _width, _height);
+            //Set all of the cells to false
+            _map.Initialize(_width, _height);
 
-            for ( int r = _maxRooms; r > 0; r--)
+            for ( int r = 0; r < _maxRooms; r++)
             {
                 int roomWidth = Game.Random.Next(_roomMinSize, _roomMaxSize);
                 int roomHeight = Game.Random.Next(_roomMinSize, _roomMaxSize);
@@ -49,7 +50,7 @@ namespace SibRus.Systems
                 }
             }
 
-            for (int r = 1; r < _map.Rooms.Count; r++)
+            for (int r = 0; r < _map.Rooms.Count; r++)
             {
                 // Don't do anything with the first room
                 if (r == 0)
@@ -89,13 +90,13 @@ namespace SibRus.Systems
             return _map;
         }
 
-        private void CreateRoom( Rectangle room)
+        private void CreateRoom(Rectangle room)
         {
-            for ( int x = room.Left + 1; x <= room.Right; x++)
+            for ( int x = room.Left + 1; x < room.Right; x++)
             {
-                for (int y = room.Top + 1; y <= room.Bottom; y++)
+                for (int y = room.Top + 1; y < room.Bottom; y++)
                 {
-                    _map.SetCellProperties(x, y, true, true, true);
+                    _map.SetCellProperties(x, y, true, true);
                 }
             }
         }
