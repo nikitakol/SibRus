@@ -1,8 +1,6 @@
 ﻿using RogueSharp;
 using SibRus.Core;
 using SibRus.Interfaces;
-using SibRus.Systems;
-using System.Linq;
 
 namespace SibRus.Behaviors
 {

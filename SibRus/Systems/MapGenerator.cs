@@ -238,7 +238,7 @@ namespace SibRus.Systems
                         if (randomRoomLocation != null)
                         {
                             // Temporarily hard code this monster to be created at level 1
-                            var monster = Kobold.Create(1);
+                            var monster = Wolf.Create(1);
                             monster.X = randomRoomLocation.X;
                             monster.Y = randomRoomLocation.Y;
                             _map.AddMonster(monster);

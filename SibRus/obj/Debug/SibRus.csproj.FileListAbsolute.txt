@@ -12,3 +12,4 @@ C:\Projects\SibRus\SibRus\obj\Debug\SibRus.csproj.CopyComplete
 C:\Projects\SibRus\SibRus\obj\Debug\SibRus.exe
 C:\Projects\SibRus\SibRus\obj\Debug\SibRus.pdb
 C:\Projects\SibRus\SibRus\bin\Debug\terminal8x8.png
+C:\Projects\SibRus\SibRus\obj\Debug\SibRus.csproj.SuggestedBindingRedirects.cache
