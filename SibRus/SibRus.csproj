@@ -55,7 +55,8 @@
     <Compile Include="Behaviors\StandardMoveAndAttack.cs" />
     <Compile Include="Core\Actor.cs" />
     <Compile Include="Core\Colors.cs" />
-    <Compile Include="Core\CommandSystem.cs" />
+    <Compile Include="Monsters\Tiger.cs" />
+    <Compile Include="Systems\CommandSystem.cs" />
     <Compile Include="Core\Direction.cs" />
     <Compile Include="Core\Door.cs" />
     <Compile Include="Core\DungeonMap.cs" />

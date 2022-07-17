@@ -29,7 +29,6 @@ namespace SibRus
         private static RLConsole _inventoryConsole;
 
         private static int _mapLevel = 1;
-
         private static bool _renderRequired = true;
 
         public static CommandSystem CommandSystem { get; private set; }
