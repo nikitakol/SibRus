@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SibRus</RootNamespace>
     <AssemblyName>SibRus</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,6 +57,7 @@
     <Compile Include="Core\Actor.cs" />
     <Compile Include="Core\Colors.cs" />
     <Compile Include="Monsters\Tiger.cs" />
+    <Compile Include="Systems\ActorGenerator.cs" />
     <Compile Include="Systems\CommandSystem.cs" />
     <Compile Include="Core\Direction.cs" />
     <Compile Include="Core\Door.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\MapGenerator.cs" />
     <Compile Include="Systems\MessageLog.cs" />
+    <Compile Include="Systems\Pool.cs" />
     <Compile Include="Systems\SchedulingSystem.cs" />
   </ItemGroup>
   <ItemGroup>

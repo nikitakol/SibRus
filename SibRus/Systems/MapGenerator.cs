@@ -15,16 +15,18 @@ namespace SibRus.Systems
         private readonly int _maxRooms;
         private readonly int _roomMaxSize;
         private readonly int _roomMinSize;
+        private readonly int _level;
 
         private readonly DungeonMap _map;
 
-        public MapGenerator(int width, int height, int maxRooms, int roomMaxSize, int roomMinSize, int mapLevel)
+        public MapGenerator(int width, int height, int maxRooms, int roomMaxSize, int roomMinSize, int level)
         {
             _width = width;
             _height = height;
             _maxRooms = maxRooms;
             _roomMaxSize = roomMaxSize;
             _roomMinSize = roomMinSize;
+            _level = level;
             _map = new DungeonMap();
         }
 
@@ -208,11 +210,7 @@ namespace SibRus.Systems
 
         private void PlacePlayer()
         {
-            Player player = Game.Player;
-            if (player == null)
-            {
-                player = new Player();
-            }
+            Player player = ActorGenerator.CreatePlayer();
 
             player.X = _map.Rooms[0].Center.X;
             player.Y = _map.Rooms[0].Center.Y;
@@ -231,17 +229,16 @@ namespace SibRus.Systems
                     var numberOfMonsters = Dice.Roll("1D4");
                     for (int i = 0; i < numberOfMonsters; i++)
                     {
-                        // Find a random walkable location in the room to place the monster
-                        Point randomRoomLocation = _map.GetRandomWalkableLocationInRoom(room);
-                        // It's possible that the room doesn't have space to place a monster
-                        // In that case skip creating the monster
-                        if (randomRoomLocation != null)
+                        if (_map.DoesRoomHaveWalkableSpace(room))
                         {
-                            // Temporarily hard code this monster to be created at level 1
-                            var monster = Wolf.Create(1);
-                            monster.X = randomRoomLocation.X;
-                            monster.Y = randomRoomLocation.Y;
-                            _map.AddMonster(monster);
+                            // Find a random walkable location in the room to place the monster
+                            Point randomRoomLocation = _map.GetRandomLocationInRoom(room);
+                            // It's possible that the room doesn't have space to place a monster
+                            // In that case skip creating the monster
+                            if (randomRoomLocation != null)
+                            {
+                                _map.AddMonster( ActorGenerator.CreateMonster( _level, _map.GetRandomLocationInRoom( room ) ) );
+                            }
                         }
                     }
                 }

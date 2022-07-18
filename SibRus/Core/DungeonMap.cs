@@ -170,7 +170,7 @@ namespace SibRus.Core
             return _monsters.FirstOrDefault(m => m.X == x && m.Y == y);
         }
 
-        public Point GetRandomWalkableLocationInRoom(Rectangle room)
+        public Point GetRandomLocationInRoom(Rectangle room)
         {
             if (DoesRoomHaveWalkableSpace(room))
             {

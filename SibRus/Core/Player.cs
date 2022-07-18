@@ -11,18 +11,7 @@ namespace SibRus.Core
     {
         public Player()
         {
-            Attack = 2;
-            AttackChance = 50;
-            Awareness = 15;
-            Color = Colors.Player;
-            Defense = 2;
-            DefenseChance = 40;
-            Gold = 0;
-            Health = 100;
-            MaxHealth = 100;
-            Name = "Rustam";
-            Speed = 10;
-            Symbol = '@';
+            
         }
 
         public void DrawStats( RLConsole statConsole)

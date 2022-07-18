@@ -22,8 +22,8 @@ namespace SibRus.Core
         public static RLColor Player = Palettes.DbLight;
 
         public static RLColor WolfColor = Palettes.DbBlood;
-
         public static RLColor BearColor = Palettes.DbBrightWood;
+        public static RLColor TigerColor = Palettes.DbSun;
 
         public static RLColor TextHeading = RLColor.White;
         public static RLColor Text = Palettes.DbLight;
