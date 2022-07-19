@@ -13,7 +13,7 @@ namespace SibRus.Monsters
                 Attack = Dice.Roll("1D2") + level / 3,
                 AttackChance = Dice.Roll("10D5"),
                 Awareness = 10,
-                Color = Colors.BearColor,
+                Color = Colors.TigerColor,
                 Defense = Dice.Roll("1D2") + level / 3,
                 DefenseChance = Dice.Roll("10D4"),
                 Gold = Dice.Roll("5D5"),

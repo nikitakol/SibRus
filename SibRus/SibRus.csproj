@@ -56,6 +56,7 @@
     <Compile Include="Behaviors\StandardMoveAndAttack.cs" />
     <Compile Include="Core\Actor.cs" />
     <Compile Include="Core\Colors.cs" />
+    <Compile Include="Interfaces\IEquipment.cs" />
     <Compile Include="Monsters\Tiger.cs" />
     <Compile Include="Systems\ActorGenerator.cs" />
     <Compile Include="Systems\CommandSystem.cs" />
