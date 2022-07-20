@@ -9,7 +9,7 @@ namespace SibRus.Interfaces
     public interface IItem
     {
         string Name { get; }
-        int RemainingUSes { get; }
+        int RemainingUses { get; }
 
         bool Use();
     }

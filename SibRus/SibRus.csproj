@@ -53,10 +53,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abilities\DoNothing.cs" />
     <Compile Include="Behaviors\StandardMoveAndAttack.cs" />
+    <Compile Include="Core\Ability.cs" />
     <Compile Include="Core\Actor.cs" />
     <Compile Include="Core\Colors.cs" />
+    <Compile Include="Core\Item.cs" />
+    <Compile Include="Interfaces\IAbility.cs" />
     <Compile Include="Interfaces\IEquipment.cs" />
+    <Compile Include="Interfaces\IItem.cs" />
+    <Compile Include="Interfaces\ITreasure.cs" />
+    <Compile Include="Items\NoItem.cs" />
     <Compile Include="Monsters\Tiger.cs" />
     <Compile Include="Systems\ActorGenerator.cs" />
     <Compile Include="Systems\CommandSystem.cs" />

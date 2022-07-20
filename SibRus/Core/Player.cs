@@ -43,6 +43,32 @@ namespace SibRus.Core
             statConsole.Print(1, 9, $"Gold:    {Gold}", Colors.Gold);
         }
 
+        public bool AddAbility(IAbility ability)
+        {
+            if (QAbility is DoNothing)
+            {
+                QAbility = ability;
+            }
+            else if (WAbility is DoNothing)
+            {
+                WAbility = ability;
+            }
+            else if (EAbility is DoNothing)
+            {
+                EAbility = ability;
+            }
+            else if (RAbility is DoNothing)
+            {
+                RAbility = ability;
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public bool AddItem(IItem item)
         {
             if (Item1 is NoItem)

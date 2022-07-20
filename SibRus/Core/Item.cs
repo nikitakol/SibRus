@@ -35,7 +35,7 @@ namespace SibRus.Core
         {
             Player player = actor as Player;
 
-            if(player != null)
+            if (player != null)
             {
                 if (player.AddItem(this))
                 {
@@ -48,7 +48,7 @@ namespace SibRus.Core
         }
 
         public RLColor Color { get; set; }
-        
+
         public char Symbol { get; set; }
 
         public int X { get; set; }
