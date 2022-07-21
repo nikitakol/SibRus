@@ -58,7 +58,10 @@
     <Compile Include="Core\Ability.cs" />
     <Compile Include="Core\Actor.cs" />
     <Compile Include="Core\Colors.cs" />
+    <Compile Include="Core\Equipment.cs" />
     <Compile Include="Core\Item.cs" />
+    <Compile Include="Equipment\BodyEquipment.cs" />
+    <Compile Include="Equipment\FeetEquipment.cs" />
     <Compile Include="Interfaces\IAbility.cs" />
     <Compile Include="Interfaces\IEquipment.cs" />
     <Compile Include="Interfaces\IItem.cs" />

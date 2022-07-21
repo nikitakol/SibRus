@@ -91,6 +91,8 @@ namespace SibRus.Systems
 
             PlaceMonsters();
 
+            PlaceEquipment();
+
             return _map;
         }
 
@@ -239,6 +241,34 @@ namespace SibRus.Systems
                             {
                                 _map.AddMonster( ActorGenerator.CreateMonster( _level, _map.GetRandomLocationInRoom( room ) ) );
                             }
+                        }
+                    }
+                }
+            }
+        }
+        private void PlaceEquipment()
+        {
+            foreach (var room in _map.Rooms)
+            {
+                if (Dice.Roll("1D10") < 3)
+                {
+                    if (_map.DoesRoomHaveWalkableSpace(room))
+                    {
+                        Point randomRoomLocation = _map.GetRandomLocationInRoom(room);
+                        if (randomRoomLocation != null)
+                        {
+                            Core.Equipment equipment;
+                            try
+                            {
+                                equipment = _equipmentGenerator.CreateEquipment();
+                            }
+                            catch (InvalidOperationException)
+                            {
+                                // no more equipment to generate so just quit adding to this level
+                                return;
+                            }
+                            Point location = _map.GetRandomLocationInRoom(room);
+                            _map.AddTreasure(location.X, location.Y, equipment);
                         }
                     }
                 }
