@@ -4,7 +4,6 @@ using System.Linq;
 using RogueSharp;
 using RogueSharp.DiceNotation;
 using SibRus.Core;
-using SibRus.Monsters;
 
 namespace SibRus.Systems
 {
@@ -18,6 +17,7 @@ namespace SibRus.Systems
         private readonly int _level;
 
         private readonly DungeonMap _map;
+        private readonly EquipmentGenerator _equipmentGenerator;
 
         public MapGenerator(int width, int height, int maxRooms, int roomMaxSize, int roomMinSize, int level)
         {
@@ -28,6 +28,7 @@ namespace SibRus.Systems
             _roomMinSize = roomMinSize;
             _level = level;
             _map = new DungeonMap();
+            _equipmentGenerator = new EquipmentGenerator(level);
         }
 
         public DungeonMap CreateMap()

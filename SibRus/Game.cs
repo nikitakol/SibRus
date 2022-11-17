@@ -32,13 +32,9 @@ namespace SibRus
         private static bool _renderRequired = true;
 
         public static CommandSystem CommandSystem { get; private set; }
-
         public static Player Player { get; set; }
-
         public static DungeonMap DungeonMap { get; private set; }
-
         public static MessageLog MessageLog { get; private set; }
-
         public static SchedulingSystem SchedulingSystem { get; private set; }
 
         public static IRandom Random { get; private set; }

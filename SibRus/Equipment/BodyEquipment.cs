@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SibRus.Equipment
+﻿namespace SibRus.Equipment
 {
     public class BodyEquipment : Core.Equipment
     {
         public static BodyEquipment None()
         {
-            return new BodyEquipment(Name = "None" );
+            return new BodyEquipment{ Name = "None" };
         }
 
         public static BodyEquipment Leather()
@@ -29,7 +23,7 @@ namespace SibRus.Equipment
             {
                 Defense = 2,
                 DefenseChance = 5,
-                Name = "Chain"
+                Name = "Vest"
             };
         }
 

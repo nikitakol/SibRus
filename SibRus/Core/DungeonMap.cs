@@ -1,5 +1,6 @@
 ﻿using RLNET;
 using RogueSharp;
+using SibRus.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,6 +11,7 @@ namespace SibRus.Core
         public List<Rectangle> Rooms;
 
         private readonly List<Monster> _monsters;
+        private readonly List<TreasurePile> _treasurePiles;
 
         public Stairs StairsUp { get; set; }
 
@@ -24,6 +26,7 @@ namespace SibRus.Core
             Rooms = new List<Rectangle>();
 
             _monsters = new List<Monster>();
+            _treasurePiles = new List<TreasurePile>();
 
             Doors = new List<Door>();
         }
@@ -147,6 +150,11 @@ namespace SibRus.Core
             SetIsWalkable(player.X, player.Y, false);
             UpdatePlayerFieldOfView();
             Game.SchedulingSystem.Add(player);
+        }
+
+        public void AddTreasure(int x, int y, ITreasure treasure)
+        {
+            _treasurePiles.Add(new TreasurePile(x, y, treasure));
         }
 
         public void AddMonster(Monster monster)

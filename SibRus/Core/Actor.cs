@@ -1,12 +1,26 @@
 ﻿using RLNET;
 using RogueSharp;
 using SibRus.Interfaces;
+using SibRus.Equipment;
 
 namespace SibRus.Core
 {
     public class Actor : IActor, IDrawable, IScheduleable
     {
+        public Actor()
+        {
+            Head = HeadEquipment.None();
+            Body = BodyEquipment.None();
+            Hand = HandEquipment.None();
+            Feet = FeetEquipment.None();
+        }
+
         // IActor
+        public HeadEquipment Head { get; set; }
+        public BodyEquipment Body { get; set; }
+        public HandEquipment Hand { get; set; }
+        public FeetEquipment Feet { get; set; }
+
         private int _attack;
         private int _attackChance;
         private int _awareness;

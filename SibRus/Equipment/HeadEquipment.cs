@@ -1,15 +1,15 @@
 ﻿namespace SibRus.Equipment
 {
-    public class FeetEquipment : Core.Equipment
+    public class HeadEquipment : Core.Equipment
     {
-        public static FeetEquipment None()
+        public static HeadEquipment None()
         {
-            return new FeetEquipment { Name = "None" };
+            return new HeadEquipment { Name = "None" };
         }
 
-        public static FeetEquipment Leather()
+        public static HeadEquipment Leather()
         {
-            return new FeetEquipment()
+            return new HeadEquipment
             {
                 Defense = 1,
                 DefenseChance = 5,
@@ -17,19 +17,19 @@
             };
         }
 
-        public static FeetEquipment Padded()
+        public static HeadEquipment Chain()
         {
-            return new FeetEquipment()
+            return new HeadEquipment()
             {
                 Defense = 1,
                 DefenseChance = 10,
-                Name = "Padded"
+                Name = "Chain"
             };
         }
 
-        public static FeetEquipment Plate()
+        public static HeadEquipment Plate()
         {
-            return new FeetEquipment()
+            return new HeadEquipment()
             {
                 Defense = 1,
                 DefenseChance = 15,

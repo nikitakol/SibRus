@@ -81,7 +81,7 @@ namespace SibRus.Core
         {
             if (this is HeadEquipment)
             {
-                actor.Body = this as BodyEquipment;
+                actor.Head = this as HeadEquipment;
                 Game.MessageLog.Add($"{actor.Name} picked up a {Name} helmet");
                 return true;
             }
@@ -106,6 +106,8 @@ namespace SibRus.Core
                 Game.MessageLog.Add($"{actor.Name} picked up {Name} boots");
                 return true;
             }
+
+            return false;
         }
         public RLColor Color { get; set; } 
         public char Symbol { get; set; }
